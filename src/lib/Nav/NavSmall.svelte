@@ -13,7 +13,6 @@
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
 	let active = $state(page.url.pathname);
-
 	let open = $state(false);
 
 	const selectTab = (tab) => {
@@ -50,9 +49,7 @@
 	.nav-back {
 		position: fixed;
 		z-index: 8;
-		width: 100%;
 		width: 100vw;
-		height: 100%;
 		height: 100vh;
 		top: 0;
 		left: 0;
@@ -79,40 +76,34 @@
 					</Item>
 				{/if}
 			{/each}
+
 			{#each tabs as tab}
 				{#if tab.nest}
 					<Separator />
 					<Subheader>{tab.label}</Subheader>
 					{#each tab.children as subTab}
 						{#if subTab.label == 'Managers'}
-  {#if managers.length}
-    <Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-      <Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
-      <Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
-    </Item>
-  {/if}
-{:else if subTab.label === 'League Rules' || subTab.label === 'Go to Sleeper'}
-  <Item activated={false}>
-    <a
-      href={subTab.dest}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="smui-list-item__text"
-      style="display: flex; align-items: center; width: 100%; text-decoration: none; color: inherit;"
-    >
-      <span class="material-icons smui-list-item__graphic">{subTab.icon}</span>
-      <span>{subTab.label}</span>
-    </a>
-  </Item>
-{:else}
-  <Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-    <Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
-    <Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
-  </Item>
-{/if}
-
+							{#if managers.length}
+								<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+									<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
+									<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
+								</Item>
+							{/if}
+						{:else if subTab.label === 'League Rules' || subTab.label === 'Go to Sleeper'}
+							<Item activated={false}>
+								<a
+									href={subTab.dest}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="smui-list-item__text"
+									style="display: flex; align-items: center; width: 100%; text-decoration: none; color: inherit;"
+								>
+									<span class="material-icons smui-list-item__graphic">{subTab.icon}</span>
+									<span>{subTab.label}</span>
+								</a>
+							</Item>
 						{:else}
-							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
+							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
 								<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
 								<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
 							</Item>
@@ -122,5 +113,4 @@
 			{/each}
 		</List>
 	</Content>
-  </Drawer>
-	
+</Drawer>
