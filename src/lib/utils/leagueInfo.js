@@ -6,7 +6,8 @@ export const dynasty = true; // true for dynasty leagues, false for redraft and 
 export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VITE_CONTENTFUL_SPACE environment variables
 
 export const homepageText = `
-  <p>League Rules, previous draft results, and more available here!</p>
+  <p>League Info, Rules, previous draft results, and more available here!</p>
+  <p>Draft Date and time is TBD - Check back soon!</p>
 `;
 /*   STEP 3   */
 /*
