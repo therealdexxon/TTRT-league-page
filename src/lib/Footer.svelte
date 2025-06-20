@@ -116,10 +116,10 @@
 					{#each tab.children as child}
                         <!-- Shouldn't show Managers tab unless managers has been populated -->
 				        {#if child.label != "Managers" || managers.length > 0}
-							{#if child.label == "League Rules"}
-								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
+							{#if child.label === "League Rules" || child.label === "Go to Sleeper"}
+    								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
 							{:else}
-                            	<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
+  								<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
 							{/if}
                         {/if}
 					{/each}
