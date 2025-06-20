@@ -106,7 +106,7 @@
 	}
 </style>
 
-<div tabindex="0" role="button" class="overlay" style="display: {display ? 'block' : 'none'};" onclick={() => open(true)}></div>
+<div tabindex="0" role="button" class="overlay" style="display: {display ? 'block' : 'none'};" on:click={() => open(true)}></div>
 
 <div class="parent">
 	<TabBar class="navBar" {tabs} key={(tab) => tab.key} bind:active>
