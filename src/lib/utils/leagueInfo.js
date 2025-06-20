@@ -5,10 +5,31 @@ export const dues = 100; // (optional) used in template constitution page
 export const dynasty = true; // true for dynasty leagues, false for redraft and keeper
 export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VITE_CONTENTFUL_SPACE environment variables
 
-/*   STEP 2   */
 export const homepageText = `
   <p>League Rules, previous draft results, and more available here!</p>
 `;
+
+// Draft date/time in Central Time (UTC-5 or UTC-6 depending on DST)
+// To be safe, use the ISO 8601 string with timezone info.
+export const draftDateTime = new Date('2025-08-30T19:00:00-05:00'); // 7 PM Central Time (UTC-5)
+
+// Helper function to get time remaining until draft
+export function getDraftCountdown() {
+  const now = new Date();
+  const diffMs = draftDateTime - now;
+
+  if (diffMs <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+  }
+
+  const seconds = Math.floor((diffMs / 1000) % 60);
+  const minutes = Math.floor((diffMs / 1000 / 60) % 60);
+  const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  return { days, hours, minutes, seconds, expired: false };
+}
+
 
 /*   STEP 3   */
 /*
