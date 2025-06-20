@@ -7,7 +7,6 @@
 	import { goto, preloadData } from '$app/navigation';
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
-	// Find active tab matching current path
 	let active = $state(tabs.find(tab => tab.dest == page.url.pathname || (tab.nest && tab.children.find(subTab => subTab.dest == page.url.pathname))));
 
 	let display = $state(false);
@@ -60,7 +59,7 @@
 		font-size: 1.8em;
 		height: 25px;
 		width: 22px;
-		color: #777; /* Uniform icon color */
+		color: #777; /* Same icon color for all */
 	}
 
 	.parent {
@@ -161,7 +160,7 @@
 					</Item>
 				{:else if subTab.label === 'Go to Sleeper' || subTab.label === 'League Rules'}
 					<Item
-						onSMUIAction={() => (window.location.href = subTab.dest)}
+						onSMUIAction={() => window.open(subTab.dest, '_blank')}
 						ontouchstart={() => preloadData(subTab.dest)}
 						onmouseover={() => preloadData(subTab.dest)}
 						style="cursor: pointer;"
