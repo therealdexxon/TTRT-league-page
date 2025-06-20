@@ -119,9 +119,6 @@
 							{#if child.label == "League Rules"}
 								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
 							{:else}
-								{#if child.label == "Go to Sleeper"}
-								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
-							{:else}
                             	<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
 							{/if}
                         {/if}
