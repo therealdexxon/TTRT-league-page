@@ -7,6 +7,7 @@
 	import { goto, preloadData } from '$app/navigation';
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
+	// Find active tab matching current path
 	let active = $state(tabs.find(tab => tab.dest == page.url.pathname || (tab.nest && tab.children.find(subTab => subTab.dest == page.url.pathname))));
 
 	let display = $state(false);
@@ -59,6 +60,7 @@
 		font-size: 1.8em;
 		height: 25px;
 		width: 22px;
+		color: #777; /* Uniform icon color */
 	}
 
 	.parent {
@@ -72,6 +74,9 @@
 		z-index: 5;
 		background-color: var(--fff);
 		transition: all 0.4s;
+		box-shadow: 0 0 3px 0 #00316b;
+		border: 1px solid #00316b;
+		border-top: none;
 	}
 
 	.overlay {
@@ -103,6 +108,10 @@
 		text-decoration: none;
 		color: inherit;
 		padding: 12px 16px;
+	}
+
+	Item {
+		cursor: pointer;
 	}
 </style>
 
@@ -136,28 +145,36 @@
 
 	<div
 		class="subMenu"
-		style="max-height: {display ? 49 * tabChildren.length - 1 - (managers.length ? 0 : 48) : 0}px; width: {width}px; top: {height}px; left: {left}px; box-shadow: 0 0 {display ? '3px' : '0'} 0 #00316b; border: {display ? '1px' : '0'} solid #00316b; border-top: none;"
+		style="max-height: {display ? 49 * tabChildren.length - 1 - (managers.length ? 0 : 48) : 0}px; width: {width}px; top: {height}px; left: {left}px;"
 	>
 		<List>
 			{#each tabChildren as subTab, ix}
 				{#if subTab.label === 'Managers'}
-					<Item class="{managers.length ? '' : 'dontDisplay'}" onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+					<Item
+						class="{managers.length ? '' : 'dontDisplay'}"
+						onSMUIAction={() => subGoto(subTab.dest)}
+						ontouchstart={() => preloadData(subTab.dest)}
+						onmouseover={() => preloadData(subTab.dest)}
+					>
 						<Graphic class="material-icons">{subTab.icon}</Graphic>
 						<Text class="subText">{subTab.label}</Text>
 					</Item>
 				{:else if subTab.label === 'Go to Sleeper' || subTab.label === 'League Rules'}
-					<li style="list-style: none; padding: 0;">
-						<a
-							href={subTab.dest}
-							class="link-style"
-							on:click|stopPropagation
-						>
-							<span class="material-icons">{subTab.icon}</span>
-							<span class="subText" style="margin-left: 8px;">{subTab.label}</span>
-						</a>
-					</li>
+					<Item
+						onSMUIAction={() => (window.location.href = subTab.dest)}
+						ontouchstart={() => preloadData(subTab.dest)}
+						onmouseover={() => preloadData(subTab.dest)}
+						style="cursor: pointer;"
+					>
+						<Graphic class="material-icons">{subTab.icon}</Graphic>
+						<Text class="subText">{subTab.label}</Text>
+					</Item>
 				{:else}
-					<Item onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+					<Item
+						onSMUIAction={() => subGoto(subTab.dest)}
+						ontouchstart={() => preloadData(subTab.dest)}
+						onmouseover={() => preloadData(subTab.dest)}
+					>
 						<Graphic class="material-icons">{subTab.icon}</Graphic>
 						<Text class="subText">{subTab.label}</Text>
 					</Item>
