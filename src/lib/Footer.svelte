@@ -83,10 +83,13 @@
 		display: inline-block;
 		cursor: pointer;
 		padding: 6px 10px;
+		color: #777;       /* Ensure consistent gray text */
+		text-decoration: none; /* Remove underline */
 	}
 
 	.navLink:hover {
 		color: #920505;
+		text-decoration: underline; /* Optional: underline on hover */
 	}
 
 	.updateNotice {
@@ -99,7 +102,6 @@
 
 <div class="footerSpacer" style="height: {footerHeight}px;" />
 
-<!-- footer with update notice -->
 <footer bind:this={el}>
     {#if outOfDate}
 	    <p class="updateNotice">There is an update available for your League Page. <a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#iv-updates">Follow the Update Instructions</a> to get all of the newest features!</p>
@@ -114,10 +116,11 @@
 					<li><div class="navLink" onclick={() => goto(tab.dest)}>{tab.label}</div></li>
 				{:else}
 					{#each tab.children as child}
-                        <!-- Shouldn't show Managers tab unless managers has been populated -->
 				        {#if child.label != "Managers" || managers.length > 0}
 							{#if child.label === "League Rules" || child.label === "Go to Sleeper"}
-    								<li><a class="navLink" href={child.dest} target="_blank" rel="noopener noreferrer">{child.label}</a></li>
+    							<li>
+    								<a class="navLink" href={child.dest}>{child.label}</a>
+    							</li>
 							{:else}
   								<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
 							{/if}
@@ -127,12 +130,8 @@
 			{/each}
 		</ul>
 	</div>
-	<!-- PLEASE DO NOT REMOVE THE COPYRIGHT -->
 	<span class="copyright">&copy; 2021 - {year} <a href="https://github.com/nmelhado/league-page">League Page</a></span>
 	<br />
-	<!-- PLEASE DO NOT REMOVE THE BUILT BY -->
 	<span class="creator">Built by <a href="http://www.nmelhado.com/">Nicholas Melhado</a><br /></span>
-	<!-- You can remove the donation link (although any donations to help
-	 maintain and enhance League Page would be greatly appreciated!) -->
 	Love League Page? Please consider <a href="https://www.buymeacoffee.com/nmelhado">donating</a> to support enhancements or just to say thank you!
 </footer>
