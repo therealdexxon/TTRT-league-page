@@ -117,7 +117,7 @@
                         <!-- Shouldn't show Managers tab unless managers has been populated -->
 				        {#if child.label != "Managers" || managers.length > 0}
 							{#if child.label === "League Rules" || child.label === "Go to Sleeper"}
-    								<li><div class="navLink" onclick={() => window.location = child.dest}>{child.label}</div></li>
+    								<li><a class="navLink" href={child.dest} target="_blank" rel="noopener noreferrer">{child.label}</a></li>
 							{:else}
   								<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
 							{/if}
