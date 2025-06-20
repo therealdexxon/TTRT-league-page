@@ -68,8 +68,8 @@ export const tabs = [
             },
             {
                 icon: 'history_edu',
-                label: 'Constitution',
-                dest: '/constitution',
+                label: 'League Rules',
+                dest: `https://drive.google.com/file/d/14mWZOu0KCiBgCC4kYl07SQJvP5-7nuFy/view`,
             },
             {
                 icon: 'sports_football',
