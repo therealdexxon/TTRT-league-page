@@ -149,8 +149,6 @@
 					<li style="list-style: none; padding: 0;">
 						<a
 							href={subTab.dest}
-							target="_blank"
-							rel="noopener noreferrer"
 							class="link-style"
 							on:click|stopPropagation
 						>
