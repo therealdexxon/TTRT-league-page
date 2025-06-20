@@ -1,47 +1,48 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { managers } from '$lib/utils/helper';
+    import { managers } from '$lib/utils/helper';
 	import { tabs } from '$lib/utils/tabs';
 	import { onMount } from 'svelte';
 
 	let outOfDate = false;
 
-	let el, footerHeight;
-	let innerWidth;
+    let el, footerHeight;
 
-	const resize = (e, delay) => {
-		const bottom = el?.getBoundingClientRect().bottom;
-		const top = el?.getBoundingClientRect().top;
-		if (delay) {
-			setTimeout(() => {
-				resize(e, false);
-			}, 100);
-		} else {
-			footerHeight = bottom - top;
-		}
-	};
+    let innerWidth;
+
+    const resize = (e, delay) => {
+        const bottom = el?.getBoundingClientRect().bottom;
+        const top = el?.getBoundingClientRect().top;
+        if(delay) {
+            setTimeout(() => {
+                resize(e, false);
+            }, 100)
+        } else {
+            footerHeight = bottom - top;
+        }
+    }
 
 	onMount(async () => {
-		const res = await fetch('/api/checkVersion', { compress: true });
+		const res = await fetch('/api/checkVersion', {compress: true})
 		const needUpdate = await res.json();
 		outOfDate = needUpdate;
-		resize(el?.getBoundingClientRect(), true);
-	});
+        resize(el?.getBoundingClientRect(), true);
+	})
 
-	let managersOutOfDate = false;
-	if (managers) {
-		for (const manager of managers) {
-			if (manager.roster && !manager.managerID) {
-				managersOutOfDate = true;
-				resize(el?.getBoundingClientRect(), true);
-				break;
-			}
-		}
-	}
+    let managersOutOfDate = false;
+    if(managers) {
+        for(const manager of managers) {
+            if(manager.roster && !manager.managerID) {
+                managersOutOfDate = true;
+                resize(el?.getBoundingClientRect(), true);
+                break;
+            }
+        }
+    }
 
 	const year = new Date().getFullYear();
 
-	$: resize(el?.getBoundingClientRect(), false, innerWidth);
+    $: resize(el?.getBoundingClientRect(), false, innerWidth);
 </script>
 
 <svelte:window bind:innerWidth={innerWidth} />
@@ -50,9 +51,9 @@
 	footer {
 		background-color: var(--f8f8f8);
 		width: 100%;
-		display: block;
-		position: absolute;
-		bottom: 0;
+        display: block;
+        position: absolute;
+        bottom: 0;
 		z-index: 1;
 		border-top: 1px solid #920505;
 		padding: 30px 0 60px;
@@ -71,39 +72,24 @@
 
 	#navigation ul li {
 		list-style-type: none;
-		display: inline-flex;
-		align-items: center;
+		display: inline;
 	}
 
 	#navigation li:not(:first-child):before {
 		content: " | ";
-		padding: 0 8px;
-		color: #777;
 	}
 
 	.navLink {
-		display: inline-flex;
-		align-items: center;
+		display: inline-block;
 		cursor: pointer;
 		padding: 6px 10px;
-		color: #777; /* consistent gray color */
-		text-decoration: none; /* no underline */
-		font-weight: 500;
+		color: #777;       /* Ensure consistent gray text */
+		text-decoration: none; /* Remove underline */
 	}
 
 	.navLink:hover {
 		color: #920505;
-		text-decoration: underline;
-	}
-
-	.navLink svg {
-		fill: #777; /* gray icon color */
-		margin-right: 6px;
-		transition: fill 0.2s ease;
-	}
-
-	.navLink:hover svg {
-		fill: #920505; /* icon color on hover */
+		text-decoration: underline; /* Optional: underline on hover */
 	}
 
 	.updateNotice {
@@ -117,56 +103,33 @@
 <div class="footerSpacer" style="height: {footerHeight}px;" />
 
 <footer bind:this={el}>
-	{#if outOfDate}
-		<p class="updateNotice">
-			There is an update available for your League Page.
-			<a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#iv-updates">
-				Follow the Update Instructions
-			</a>
-			to get all of the newest features!
-		</p>
-	{/if}
-	{#if managersOutOfDate}
-		<p class="updateNotice">
-			Your managers page needs an update,
-			<a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#2-add-managers">
-				please follow the instructions
-			</a>
-			to get the most up-to-date experience.
-		</p>
-	{/if}
-
+    {#if outOfDate}
+	    <p class="updateNotice">There is an update available for your League Page. <a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#iv-updates">Follow the Update Instructions</a> to get all of the newest features!</p>
+    {/if}
+    {#if managersOutOfDate}
+	    <p class="updateNotice">Your managers page needs an update, <a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#2-add-managers">please follow the instructions</a> to get the most up-to-date experience.</p>
+    {/if}
 	<div id="navigation">
 		<ul>
 			{#each tabs as tab}
 				{#if !tab.nest}
-					<li>
-						<a class="navLink" href={tab.dest}>
-							{#if tab.icon}
-								<!-- Example icon rendering, adjust as needed -->
-								{@html tab.icon}
-							{/if}
-							{tab.label}
-						</a>
-					</li>
+					<li><div class="navLink" onclick={() => goto(tab.dest)}>{tab.label}</div></li>
 				{:else}
 					{#each tab.children as child}
-						{#if child.label != "Managers" || managers.length > 0}
-							<li>
-								<a class="navLink" href={child.dest}>
-									{#if child.icon}
-										{@html child.icon}
-									{/if}
-									{child.label}
-								</a>
-							</li>
-						{/if}
+				        {#if child.label != "Managers" || managers.length > 0}
+							{#if child.label === "League Rules" || child.label === "Go to Sleeper"}
+    							<li>
+    								<a class="navLink" href={child.dest}>{child.label}</a>
+    							</li>
+							{:else}
+  								<li><div class="navLink" onclick={() => goto(child.dest)}>{child.label}</div></li>
+							{/if}
+                        {/if}
 					{/each}
 				{/if}
 			{/each}
 		</ul>
 	</div>
-
 	<span class="copyright">&copy; 2021 - {year} <a href="https://github.com/nmelhado/league-page">League Page</a></span>
 	<br />
 	<span class="creator">Built by <a href="http://www.nmelhado.com/">Nicholas Melhado</a><br /></span>
