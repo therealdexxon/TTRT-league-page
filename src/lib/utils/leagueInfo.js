@@ -65,12 +65,12 @@ export const homepageText = `
   {countdownText}
 </div>
 
-/*   STEP 4   */
-/*
-3 managers as an example. Uncomment (remove the //) before each line to make it live code
-If you're having trouble, reference the Training Wheels' Manager Section
-https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#ii-adding-managers-and-changing-the-homepage-text
-*/
+//*   STEP 4   *//
+//*
+//3 managers as an example. Uncomment (remove the //) before each line to make it live code
+//If you're having trouble, reference the Training Wheels' Manager Section
+//https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#ii-adding-managers-and-changing-the-homepage-text
+//*/
 
 // To omit an optional field, set it's value to null
 
