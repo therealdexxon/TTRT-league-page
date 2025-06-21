@@ -15,15 +15,14 @@ export const homepageText = `
 <script>
   import { onMount } from 'svelte';
 
-  //Set the countdown target date: August 30, 2025, 7:00 PM CDT
-  const countdownDate = new Date('2025-08-31T00:00:00Z'); // This is the UTC time equivalent of 7:00 PM CDT on August 30, 2025
+
+  const countdownDate = new Date('2025-08-31T00:00:00Z'); 
   let countdownText = '';
 
   const updateCountdown = () => {
     let now = new Date().getTime();
     let distance = countdownDate - now;
 
-    //Time calculations
     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -37,12 +36,12 @@ export const homepageText = `
   };
 
   onMount(() => {
-    //Update countdown every second
+
     const interval = setInterval(() => {
       updateCountdown();
     }, 1000);
     
-    return () => clearInterval(interval); //Cleanup when the component is removed
+    return () => clearInterval(interval); 
   });
 </script>
 
