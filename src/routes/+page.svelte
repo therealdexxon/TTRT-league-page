@@ -162,7 +162,7 @@
                     {:else if nflStateData.season_type == 'post'}
                         Postseason
                     {:else}
-                        Season - {nflStateData.week > 0 ? Week ${nflStateData.week} : "Preseason"}
+                        Season - {nflStateData.week > 0 ? `Week ${nflStateData.week}` : "Preseason"}
                     {/if}
                 </div>
             {:catch error}
