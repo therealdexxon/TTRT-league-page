@@ -60,7 +60,7 @@
 
 <Icon class="material-icons menuIcon" onclick={() => open = true} ripple={false} touch={true}>menu</Icon>
 
-<div class="nav-back" style="pointer-events: {open ? "visible" : "none"}; opacity: {open ? 1 : 0};" onclick={() => open = false}></div>
+<div class="nav-back" style="pointer-events: {open ? 'visible' : 'none'}; opacity: {open ? 1 : 0};" onclick={() => open = false}></div>
 
 <Drawer variant="modal" class="nav-drawer" fixed={true} bind:open>
 	<Header>
@@ -70,9 +70,9 @@
 		<List>
 			{#each tabs as tab}
 				{#if !tab.nest && (tab.label != 'Blog' || (tab.label == 'Blog' && enableBlog))}
-					<Item href="javascript:void(0)" onSMUIAction={() => selectTab(tab)} ontouchstart={() => preloadData(tab.dest)} onmouseover={() => preloadData(tab.dest)} activated={active == tab.dest} >
-						<Graphic class="material-icons{active == tab.dest ? "" : " nav-item"}" aria-hidden="true">{tab.icon}</Graphic>
-						<Text class="{active == tab.dest ? "" : "nav-item"}">{tab.label}</Text>
+					<Item href="javascript:void(0)" onSMUIAction={() => selectTab(tab)} ontouchstart={() => preloadData(tab.dest)} onmouseover={() => preloadData(tab.dest)} activated={active == tab.dest}>
+						<Graphic class="material-icons{active == tab.dest ? '' : ' nav-item'}" aria-hidden="true">{tab.icon}</Graphic>
+						<Text class="{active == tab.dest ? '' : 'nav-item'}">{tab.label}</Text>
 					</Item>
 				{/if}
 			{/each}
@@ -84,28 +84,20 @@
 					{#each tab.children as subTab}
 						{#if subTab.label == 'Managers'}
 							{#if managers.length}
-								<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-									<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
-									<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
+								<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+									<Graphic class="material-icons{active == subTab.dest ? '' : ' nav-item'}" aria-hidden="true">{subTab.icon}</Graphic>
+									<Text class="{active == subTab.dest ? '' : 'nav-item'}">{subTab.label}</Text>
 								</Item>
 							{/if}
 						{:else if subTab.label === 'League Rules' || subTab.label === 'Go to Sleeper'}
-							<Item activated={false}>
-								<a
-									href={subTab.dest}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="smui-list-item__text"
-									style="display: flex; align-items: center; width: 100%; text-decoration: none; color: inherit;"
-								>
-									<span class="material-icons smui-list-item__graphic">{subTab.icon}</span>
-									<span>{subTab.label}</span>
-								</a>
+							<Item href={subTab.dest} target="_blank" rel="noopener noreferrer" activated={false} onmouseover={() => preloadData(subTab.dest)} ontouchstart={() => preloadData(subTab.dest)}>
+								<Graphic class="material-icons{active == subTab.dest ? '' : ' nav-item'}" aria-hidden="true">{subTab.icon}</Graphic>
+								<Text class="{active == subTab.dest ? '' : 'nav-item'}">{subTab.label}</Text>
 							</Item>
 						{:else}
-							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest}  ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-								<Graphic class="material-icons{active == subTab.dest ? "" : " nav-item"}" aria-hidden="true">{subTab.icon}</Graphic>
-								<Text class="{active == subTab.dest ? "" : "nav-item"}">{subTab.label}</Text>
+							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+								<Graphic class="material-icons{active == subTab.dest ? '' : ' nav-item'}" aria-hidden="true">{subTab.icon}</Graphic>
+								<Text class="{active == subTab.dest ? '' : 'nav-item'}">{subTab.label}</Text>
 							</Item>
 						{/if}
 					{/each}
