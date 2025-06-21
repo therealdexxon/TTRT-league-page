@@ -13,53 +13,15 @@ export const homepageText = `
 /*   STEP 3   */
 //add a timer for the draft 
 <script>
-  import { onMount } from 'svelte';
-
-
-  const countdownDate = new Date('2025-08-31T00:00:00Z'); 
-  let countdownText = '';
-
-  const updateCountdown = () => {
-    let now = new Date().getTime();
-    let distance = countdownDate - now;
-
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    if (distance < 0) {
-      countdownText = "The Draft is Live!";
-    } else {
-      countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-  };
-
-  onMount(() => {
-
-    const interval = setInterval(() => {
-      updateCountdown();
-    }, 1000);
-    
-    return () => clearInterval(interval); 
-  });
+  import CountdownTimer from './CountdownTimer.svelte'; // Adjust the path if needed
 </script>
 
-<style>
-  #countdown-timer {
-    font-size: 2em;
-    font-weight: bold;
-    color: #f5a623;
-    padding: 10px;
-    background-color: #00316b;
-    text-align: center;
-    border-radius: 5px;
-    margin-top: 20px;
-    width: 100%;
-  }
-</style>
+<div>
+  <h1>Welcome to the {leagueName}!</h1>
+  <p>League Info, Rules, previous draft results, and more available here!</p>
+  <p>Draft Date and time is TBD - Check back soon!</p>
 
-<!-- Countdown Timer Display -->
-<div id="countdown-timer">
-  {countdownText}
+  <!-- Insert the countdown timer here -->
+  <CountdownTimer />
 </div>
+
