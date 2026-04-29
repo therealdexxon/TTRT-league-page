@@ -8,9 +8,9 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 /*   STEP 2   */
 export const homepageText = `
   <p>League Info, Rules, previous draft results, and more available here!</p>
-  <p>Draft Date is SET for August 29th, 7pm central!</p>
-  <p>Keepers will lock the week prior on August 22nd, 7pm central!</p>
-  <p>ADP values will lock one week prior to keeper lock date, August 15th at NOON central!</p>
+  <p>Draft Date is tentatively set for August 22nd, 5pm central!</p>
+  <p>Keepers will lock TBD!</p>
+  <p>ADP values will lock one week prior to keeper lock date,TBD!</p>
  `;
 /*   STEP 3   */
 /*
